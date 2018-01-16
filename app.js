@@ -1,6 +1,7 @@
 const express = require('express');
 const path = require('path');
 var mongoose = require('mongoose');
+var bodyParser = require('body-parser');
 
 mongoose.connect('mongodb://localhost/mystore', { useMongoClient: true });
 let db = mongoose.connection;
@@ -18,6 +19,18 @@ db.on('error',(err) => {
 
 //init app
 const app = express();
+
+
+// body parser middleare
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// parse application/json
+app.use(bodyParser.json());
+
+//set public folder (static files)
+app.use(express.static(path.join(__dirname,'public')));
+
 
 //bring in models
 let Article = require('./models/articles');
@@ -50,6 +63,36 @@ app.get('/articles/add',(req,res) => {
 		title : 'Add Article'
 	});
 });
+
+//get single article
+app.get('/article/:id',(req,res) =>{
+	Article.findById(req.params.id,(err,article) => {
+		if(err){
+			console.log(err);
+		}else{
+			res.render('article',{
+				article : article
+			});
+		}
+	});
+});
+
+//add submit post
+app.post('/articles/add',(req , res) => {
+	let article = new Article();
+	article.title = req.body.title;
+	article.author = req.body.author;
+	article.body = req.body.body;
+
+	article.save((err) =>{
+		if(err){
+			console.log(err);
+			//return;
+		}else{
+			res.redirect('/');
+		}
+	})
+})
 
 //set local server to port 3001
 app.listen(3001, () => {

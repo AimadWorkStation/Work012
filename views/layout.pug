@@ -2,9 +2,25 @@ doctype html
 html
 	head
 		title myapp
+		link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
 	body
-		block content
-		br
-		hr
-		footer
-			p Copyright &copy; 2017
+		nav.navbar.navbar-inverse.bg-light
+			.container
+				a.navbar-brand(href='/') Mystock
+				a.navbar-brand(href='/articles/add') Add Article
+
+		.container
+			block content
+			br
+			hr
+			footer
+				p Copyright &copy; 2017
+		script(src='/bower_components/jquery/dist/jquery.min.js')
+		script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+
+
+
+
+
+		
+		

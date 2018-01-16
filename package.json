@@ -1,0 +1,19 @@
+{
+  "name": "work012",
+  "version": "1.0.0",
+  "description": "web application with nodejs and express jquery and more",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "ajax",
+    "mongodb",
+    "jquery",
+    "bootstrap"
+  ],
+  "author": "Aimad had",
+  "license": "ISC"
+}

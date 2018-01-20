@@ -3,6 +3,7 @@ html
 	head
 		title myapp
 		link(rel='stylesheet' href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
+		link(rel='stylesheet' href='/css/style.css')
 	body
 		nav.navbar.navbar-inverse.bg-light
 			.container
@@ -10,6 +11,7 @@ html
 				a.navbar-brand(href='/articles/add') Add Article
 
 		.container
+			!= messages('message', locals)
 			block content
 			br
 			hr
@@ -17,6 +19,7 @@ html
 				p Copyright &copy; 2017
 		script(src='/bower_components/jquery/dist/jquery.min.js')
 		script(src='/bower_components/bootstrap/dist/js/bootstrap.min.js')
+		script(src='/js/main.js')
 
 
 

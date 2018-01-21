@@ -93,93 +93,10 @@ app.get('/',(req,res) => {
 	});
 });
 
-//Add root (add article)
-app.get('/articles/add',(req,res) => {
-	res.render('add_article',{
-		title : 'Add Article'
-	});
-});
+// router file
+let articles = require('./routes/articles');
+app.use('/articles',articles);
 
-//get single article
-app.get('/article/:id',(req,res) =>{
-	Article.findById(req.params.id,(err,article) => {
-		if(err){
-			console.log(err);
-		}else{
-			res.render('article',{
-				article : article
-			});
-		}
-	});
-});
-
-//add submit post
-app.post('/articles/add',(req , res) => {
-	let article = new Article();
-	article.title = req.body.title;
-	article.author = req.body.author;
-	article.body = req.body.body;
-
-	article.save((err) =>{
-		if(err){
-			req.flash('danger','Article Probleme');
-			console.log(err);
-			//return;
-		}else{
-			req.flash('success','Article Added');
-			res.redirect('/');
-		}
-	})
-})
-
-
-
-//Load edit article
-app.get('/article/edit/:id',(req,res) =>{
-	Article.findById(req.params.id,(err,article) => {
-		if(err){
-			console.log(err);
-		}else{
-			req.flash("success","Article Added");
-			res.render('edit_article',{
-				title : 'Edit Article',
-				article : article
-			});
-		}
-	});
-});
-
-//update submit post
-app.post('/articles/edit/:id',(req , res) => {
-	let article = {};
-	article.title = req.body.title;
-	article.author = req.body.author;
-	article.body = req.body.body;
-
-	let query = {_id:req.params.id}
-	//Article is model not object acticle
-	Article.update(query,article,(err) =>{
-		if(err){
-			console.log(err);
-			//return;
-		}else{
-			req.flash('success','Article Added');
-			res.redirect('/');
-		}
-	});
-});
-
-app.delete('/article/:id',(req,res)=>{
-	let query = {_id:req.params.id}
-	Article.remove(query,(err)=>{
-		if(err){
-			console.log(err);
-		}else{
-			res.send('Delete Success');
-		}
-		
-	});
-});
 
 //set local server to port 3001
 app.listen(3001, () => {

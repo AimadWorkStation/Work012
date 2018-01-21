@@ -13,10 +13,14 @@ html
 					li
 						a.navbar-brand(href='/articles/add') Add Article
 				ul.nav.navbar-nav.navbar-right
-					li
-						a.navbar-brand(href='/users/Login') Login 
-					li
-						a.navbar-brand(href='/users/Register') Register
+					if user
+						li
+							a.navbar-brand(href='/users/logout') Logout
+					else 
+						li
+							a.navbar-brand(href='/users/Login') Login 
+						li
+							a.navbar-brand(href='/users/Register') Register
 
 		.container
 			!= messages('message', locals)

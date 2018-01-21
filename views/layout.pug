@@ -9,9 +9,10 @@ html
 			.container
 				ul.nav.navbar-nav
 					li
-						a.navbar-brand(href='/') Mystock
-					li
-						a.navbar-brand(href='/articles/add') Add Article
+						a.navbar-brand(href='/') Postes
+					if user
+						li
+							a.navbar-brand(href='/articles/add') Add Article
 				ul.nav.navbar-nav.navbar-right
 					if user
 						li

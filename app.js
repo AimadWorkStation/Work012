@@ -5,10 +5,12 @@ const bodyParser = require('body-parser');
 const expressValidator = require('express-validator');
 const flash = require('connect-flash');
 const session = require('express-session');
+const passport = require('passport');
+const config = require('./config/database');
 
 
 
-mongoose.connect('mongodb://localhost/mystore', { useMongoClient: true });
+mongoose.connect(config.database, { useMongoClient: true });
 let db = mongoose.connection;
 
 //check connection
@@ -68,6 +70,12 @@ app.use(expressValidator({
 	}
 }));
 
+//passport config
+require('./config/passport')(passport);
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 //bring in models
 let Article = require('./models/articles');
 
@@ -95,8 +103,9 @@ app.get('/',(req,res) => {
 
 // router file
 let articles = require('./routes/articles');
+let users = require('./routes/users');
 app.use('/articles',articles);
-
+app.use('/users',users);
 
 //set local server to port 3001
 app.listen(3001, () => {

@@ -7,8 +7,16 @@ html
 	body
 		nav.navbar.navbar-inverse.bg-light
 			.container
-				a.navbar-brand(href='/') Mystock
-				a.navbar-brand(href='/articles/add') Add Article
+				ul.nav.navbar-nav
+					li
+						a.navbar-brand(href='/') Mystock
+					li
+						a.navbar-brand(href='/articles/add') Add Article
+				ul.nav.navbar-nav.navbar-right
+					li
+						a.navbar-brand(href='/users/Login') Login 
+					li
+						a.navbar-brand(href='/users/Register') Register
 
 		.container
 			!= messages('message', locals)

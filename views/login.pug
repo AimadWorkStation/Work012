@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	h1.text-center Login
+	form.w-50.m-auto(method='POST', action='/users/Login')
+		#form-group
+			label Username :
+			input.form-control(name='username', type='text')
+		#form-group
+			label Password :
+			input.form-control(name='password', type='password')
+		input.btn.btn-primary(type='submit', value='submit')
